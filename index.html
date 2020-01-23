@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Filmer</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css?family=Bangers&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <h1>Filmer</h1>
+  </header>
+  <div class="filmDiv" id="container">
+
+    <script>
+
+      fetch('https://ndr2l4ex5h.execute-api.eu-west-1.amazonaws.com/dev/movies')
+        .then(res => {
+          return res.json()
+        })
+        .then(dataarray => {
+          console.log(dataarray)
+          i = 0
+          for (data of dataarray) {
+            let newAItem = document.createElement('a')
+            newAItem.setAttribute("class", "filmBox")
+            newAItem.setAttribute("href", "detaljer.html")
+            newAItem.textContent = data.title
+            container.appendChild(newAItem)
+            i++
+          }
+
+        })
+
+
+    </script>
+
+  </div>
+</body>
+
+</html>

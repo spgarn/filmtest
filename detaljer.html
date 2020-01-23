@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Filmdetaljer</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css?family=Bangers&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <h1>Detaljer</h1>
+  </header>
+  <div class="filmDivDet" id="container">
+
+    <script>
+      fetch('https://ndr2l4ex5h.execute-api.eu-west-1.amazonaws.com/dev/movies?id=')
+        .then(res => {
+          return res.json()
+        })
+        .then(dataarray => {
+          for (i = 1; i <= dataarray.length; i++) {
+            fetch('https://ndr2l4ex5h.execute-api.eu-west-1.amazonaws.com/dev/movies?id=' + i)
+              .then(res => {
+                return res.json()
+              })
+              .then(dataObjekt => {
+                let newOItem = document.createElement('div')
+                newOItem.setAttribute("class", "detaljInfo")
+                container.appendChild(newOItem)
+                newOItem.textContent = (`
+                  Title: ${dataObjekt.title} \r\n
+                  Poster:${dataObjekt.poster}\r\n
+                  Year: ${dataObjekt.int} \r\n
+                  Actors: ${dataObjekt.actors}`)
+              })
+          }
+        })
+
+
+    </script>
+
+  </div>
+  <div class="buttonContainer">
+    <a href="index.html" class="buttonBot">Tillbaka till filmer</a>
+  </div>
+</body>
+
+</html>
